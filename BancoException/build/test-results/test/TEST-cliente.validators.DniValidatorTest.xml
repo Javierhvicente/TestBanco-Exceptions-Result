@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cliente.validators.DniValidatorTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-09-20T10:39:03" hostname="DESKTOP-5QH9VRT" time="0.021">
+<testsuite name="cliente.validators.DniValidatorTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-09-20T10:48:31" hostname="JAVIER" time="0.063">
   <properties/>
-  <testcase name="DNI incorrecto, nombre incorrecto por debajo de 2 caracteres" classname="cliente.validators.DniValidatorTest" time="0.005"/>
-  <testcase name="Validación del DNI correcto" classname="cliente.validators.DniValidatorTest" time="0.001"/>
-  <testcase name="DNI incorrecto, nombre incorrecto por encima del valor limite" classname="cliente.validators.DniValidatorTest" time="0.001"/>
-  <testcase name="DNI incorrecto, menos de 9 caracteres" classname="cliente.validators.DniValidatorTest" time="0.002"/>
-  <testcase name="DNI incorrecto, solo letras" classname="cliente.validators.DniValidatorTest" time="0.001"/>
-  <testcase name="DNI incorrecto, más de 9 caracteres" classname="cliente.validators.DniValidatorTest" time="0.002"/>
-  <testcase name="DNI incorrecto, letra incorrecta" classname="cliente.validators.DniValidatorTest" time="0.002"/>
-  <testcase name="DNI incorrecto, solo números" classname="cliente.validators.DniValidatorTest" time="0.002"/>
-  <system-out><![CDATA[12:39:03.923 [Test worker] ERROR org.example.cliente.validators.DniValidatorKt -- DNI inválido, el DNI debe estar compuesto de 8 digitos y una de las letras permitidas mayúsculas
-12:39:03.925 [Test worker] ERROR org.example.cliente.validators.DniValidatorKt -- DNI inválido, el DNI debe estar compuesto de 8 digitos y una de las letras permitidas mayúsculas
-12:39:03.928 [Test worker] ERROR org.example.cliente.validators.DniValidatorKt -- DNI inválido, el DNI debe estar compuesto de 8 digitos y una de las letras permitidas mayúsculas
-12:39:03.933 [Test worker] ERROR org.example.cliente.validators.DniValidatorKt -- DNI inválido, el DNI debe estar compuesto de 8 digitos y una de las letras permitidas mayúsculas
+  <testcase name="DNI incorrecto, nombre incorrecto por debajo de 2 caracteres" classname="cliente.validators.DniValidatorTest" time="0.016"/>
+  <testcase name="Validación del DNI correcto" classname="cliente.validators.DniValidatorTest" time="0.002"/>
+  <testcase name="DNI incorrecto, nombre incorrecto por encima del valor limite" classname="cliente.validators.DniValidatorTest" time="0.005"/>
+  <testcase name="DNI incorrecto, menos de 9 caracteres" classname="cliente.validators.DniValidatorTest" time="0.009"/>
+  <testcase name="DNI incorrecto, solo letras" classname="cliente.validators.DniValidatorTest" time="0.007"/>
+  <testcase name="DNI incorrecto, más de 9 caracteres" classname="cliente.validators.DniValidatorTest" time="0.005"/>
+  <testcase name="DNI incorrecto, letra incorrecta" classname="cliente.validators.DniValidatorTest" time="0.004"/>
+  <testcase name="DNI incorrecto, solo números" classname="cliente.validators.DniValidatorTest" time="0.006"/>
+  <system-out><![CDATA[12:48:31.767 [Test worker] ERROR org.example.cliente.validators.DniValidatorKt -- DNI inválido, el DNI debe estar compuesto de 8 digitos y una de las letras permitidas mayúsculas
+12:48:31.774 [Test worker] ERROR org.example.cliente.validators.DniValidatorKt -- DNI inválido, el DNI debe estar compuesto de 8 digitos y una de las letras permitidas mayúsculas
+12:48:31.781 [Test worker] ERROR org.example.cliente.validators.DniValidatorKt -- DNI inválido, el DNI debe estar compuesto de 8 digitos y una de las letras permitidas mayúsculas
+12:48:31.794 [Test worker] ERROR org.example.cliente.validators.DniValidatorKt -- DNI inválido, el DNI debe estar compuesto de 8 digitos y una de las letras permitidas mayúsculas
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

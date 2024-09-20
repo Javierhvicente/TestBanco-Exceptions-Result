@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cliente.validators.TarjetaValidatorTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-09-20T10:39:03" hostname="DESKTOP-5QH9VRT" time="0.024">
+<testsuite name="cliente.validators.TarjetaValidatorTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-09-20T10:48:31" hostname="JAVIER" time="0.065">
   <properties/>
-  <testcase name="validateTarjetaCreditoOk()" classname="cliente.validators.TarjetaValidatorTest" time="0.009"/>
-  <testcase name="validateTarjetaCreditoInvalidNumero()" classname="cliente.validators.TarjetaValidatorTest" time="0.002"/>
-  <testcase name="validateTarjetaNumeroPorDebajoDelValorMinimo()" classname="cliente.validators.TarjetaValidatorTest" time="0.002"/>
-  <testcase name="validateTarjetaNumeroInvalido()" classname="cliente.validators.TarjetaValidatorTest" time="0.002"/>
-  <testcase name="validateTarjetaNumeroPorEncimaDelValorMaximo()" classname="cliente.validators.TarjetaValidatorTest" time="0.002"/>
-  <testcase name="invalidFechadeVencimiento()" classname="cliente.validators.TarjetaValidatorTest" time="0.002"/>
-  <testcase name="validateTarjetaVencidaPorEncimaDelValorlimite()" classname="cliente.validators.TarjetaValidatorTest" time="0.002"/>
-  <testcase name="validateTarjetaNumeroNoSonDigitos()" classname="cliente.validators.TarjetaValidatorTest" time="0.001"/>
-  <system-out><![CDATA[12:39:03.958 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
-12:39:03.963 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando fecha de vencimiento
-12:39:03.965 [Test worker] INFO org.example.cliente.validators.TarjetaValidatorKt -- La fecha de vencimiento es válida
-12:39:03.967 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
-12:39:03.970 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
-12:39:03.972 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
-12:39:03.975 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
-12:39:03.977 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
-12:39:03.977 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando fecha de vencimiento
-12:39:03.977 [Test worker] ERROR org.example.cliente.validators.TarjetaValidatorKt -- La fecha de vencimiento no es válida. Mes incorrecto o año incorrecto
-12:39:03.979 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
-12:39:03.979 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando fecha de vencimiento
-12:39:03.979 [Test worker] INFO org.example.cliente.validators.TarjetaValidatorKt -- La fecha de vencimiento es válida
-12:39:03.980 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
+  <testcase name="validateTarjetaCreditoOk()" classname="cliente.validators.TarjetaValidatorTest" time="0.025"/>
+  <testcase name="validateTarjetaCreditoInvalidNumero()" classname="cliente.validators.TarjetaValidatorTest" time="0.008"/>
+  <testcase name="validateTarjetaNumeroPorDebajoDelValorMinimo()" classname="cliente.validators.TarjetaValidatorTest" time="0.004"/>
+  <testcase name="validateTarjetaNumeroInvalido()" classname="cliente.validators.TarjetaValidatorTest" time="0.005"/>
+  <testcase name="validateTarjetaNumeroPorEncimaDelValorMaximo()" classname="cliente.validators.TarjetaValidatorTest" time="0.005"/>
+  <testcase name="invalidFechadeVencimiento()" classname="cliente.validators.TarjetaValidatorTest" time="0.004"/>
+  <testcase name="validateTarjetaVencidaPorEncimaDelValorlimite()" classname="cliente.validators.TarjetaValidatorTest" time="0.003"/>
+  <testcase name="validateTarjetaNumeroNoSonDigitos()" classname="cliente.validators.TarjetaValidatorTest" time="0.004"/>
+  <system-out><![CDATA[12:48:31.890 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
+12:48:31.905 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando fecha de vencimiento
+12:48:31.911 [Test worker] INFO org.example.cliente.validators.TarjetaValidatorKt -- La fecha de vencimiento es válida
+12:48:31.919 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
+12:48:31.924 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
+12:48:31.930 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
+12:48:31.936 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
+12:48:31.942 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
+12:48:31.942 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando fecha de vencimiento
+12:48:31.942 [Test worker] ERROR org.example.cliente.validators.TarjetaValidatorKt -- La fecha de vencimiento no es válida. Mes incorrecto o año incorrecto
+12:48:31.945 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
+12:48:31.946 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando fecha de vencimiento
+12:48:31.946 [Test worker] INFO org.example.cliente.validators.TarjetaValidatorKt -- La fecha de vencimiento es válida
+12:48:31.950 [Test worker] DEBUG org.example.cliente.validators.TarjetaValidatorKt -- Validando número de tarjeta
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

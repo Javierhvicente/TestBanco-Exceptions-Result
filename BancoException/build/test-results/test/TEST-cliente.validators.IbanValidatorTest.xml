@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cliente.validators.IbanValidatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-09-20T10:39:03" hostname="DESKTOP-5QH9VRT" time="0.019">
+<testsuite name="cliente.validators.IbanValidatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-09-20T10:48:31" hostname="JAVIER" time="0.082">
   <properties/>
-  <testcase name="validateCuentaErrorIbanInvalido()" classname="cliente.validators.IbanValidatorTest" time="0.011"/>
-  <testcase name="validaetCuentaErrorSueldoNegativo()" classname="cliente.validators.IbanValidatorTest" time="0.002"/>
-  <testcase name="validateCuentaOk()" classname="cliente.validators.IbanValidatorTest" time="0.002"/>
-  <testcase name="validateCuentaErrorIbanShort()" classname="cliente.validators.IbanValidatorTest" time="0.002"/>
-  <testcase name="validaetCuentaErrorSueldoPorEncimaDeCero()" classname="cliente.validators.IbanValidatorTest" time="0.001"/>
-  <system-out><![CDATA[12:39:03.938 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
-12:39:03.938 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
-12:39:03.940 [Test worker] ERROR org.example.cliente.validators.IbanValidatorKt -- Cuenta bancaria inválida
-12:39:03.948 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
-12:39:03.948 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
-12:39:03.948 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando sueldo
-12:39:03.948 [Test worker] ERROR org.example.cliente.validators.IbanValidatorKt -- El saldo de la cuenta no puede ser menor a 0
-12:39:03.948 [Test worker] ERROR org.example.cliente.validators.IbanValidatorKt -- Cuenta bancaria inválida
-12:39:03.949 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
-12:39:03.949 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
-12:39:03.950 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando sueldo
-12:39:03.950 [Test worker] INFO org.example.cliente.validators.IbanValidatorKt -- Saldo válido
-12:39:03.952 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
-12:39:03.952 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
-12:39:03.952 [Test worker] ERROR org.example.cliente.validators.IbanValidatorKt -- Cuenta bancaria inválida
-12:39:03.954 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
-12:39:03.954 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
-12:39:03.954 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando sueldo
-12:39:03.954 [Test worker] INFO org.example.cliente.validators.IbanValidatorKt -- Saldo válido
+  <testcase name="validateCuentaErrorIbanInvalido()" classname="cliente.validators.IbanValidatorTest" time="0.057"/>
+  <testcase name="validaetCuentaErrorSueldoNegativo()" classname="cliente.validators.IbanValidatorTest" time="0.007"/>
+  <testcase name="validateCuentaOk()" classname="cliente.validators.IbanValidatorTest" time="0.004"/>
+  <testcase name="validateCuentaErrorIbanShort()" classname="cliente.validators.IbanValidatorTest" time="0.005"/>
+  <testcase name="validaetCuentaErrorSueldoPorEncimaDeCero()" classname="cliente.validators.IbanValidatorTest" time="0.005"/>
+  <system-out><![CDATA[12:48:31.809 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
+12:48:31.809 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
+12:48:31.815 [Test worker] ERROR org.example.cliente.validators.IbanValidatorKt -- Cuenta bancaria inválida
+12:48:31.862 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
+12:48:31.863 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
+12:48:31.863 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando sueldo
+12:48:31.863 [Test worker] ERROR org.example.cliente.validators.IbanValidatorKt -- El saldo de la cuenta no puede ser menor a 0
+12:48:31.865 [Test worker] ERROR org.example.cliente.validators.IbanValidatorKt -- Cuenta bancaria inválida
+12:48:31.868 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
+12:48:31.868 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
+12:48:31.869 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando sueldo
+12:48:31.869 [Test worker] INFO org.example.cliente.validators.IbanValidatorKt -- Saldo válido
+12:48:31.874 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
+12:48:31.876 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
+12:48:31.876 [Test worker] ERROR org.example.cliente.validators.IbanValidatorKt -- Cuenta bancaria inválida
+12:48:31.879 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando cuenta bancaria
+12:48:31.879 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando IBAN
+12:48:31.880 [Test worker] DEBUG org.example.cliente.validators.IbanValidatorKt -- Validando sueldo
+12:48:31.881 [Test worker] INFO org.example.cliente.validators.IbanValidatorKt -- Saldo válido
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

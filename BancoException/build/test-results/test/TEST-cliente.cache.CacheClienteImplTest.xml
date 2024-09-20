@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cliente.cache.CacheClienteImplTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-09-20T10:39:03" hostname="DESKTOP-5QH9VRT" time="0.014">
+<testsuite name="cliente.cache.CacheClienteImplTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2024-09-20T10:48:31" hostname="JAVIER" time="0.038">
   <properties/>
-  <testcase name="remove()" classname="cliente.cache.CacheClienteImplTest" time="0.003"/>
-  <testcase name="getNotFound()" classname="cliente.cache.CacheClienteImplTest" time="0.001"/>
-  <testcase name="get()" classname="cliente.cache.CacheClienteImplTest" time="0.003"/>
-  <testcase name="put()" classname="cliente.cache.CacheClienteImplTest" time="0.002"/>
-  <testcase name="size()" classname="cliente.cache.CacheClienteImplTest" time="0.001"/>
-  <testcase name="clear()" classname="cliente.cache.CacheClienteImplTest" time="0.0"/>
+  <testcase name="remove()" classname="cliente.cache.CacheClienteImplTest" time="0.01"/>
+  <testcase name="getNotFound()" classname="cliente.cache.CacheClienteImplTest" time="0.003"/>
+  <testcase name="get()" classname="cliente.cache.CacheClienteImplTest" time="0.007"/>
+  <testcase name="put()" classname="cliente.cache.CacheClienteImplTest" time="0.005"/>
+  <testcase name="size()" classname="cliente.cache.CacheClienteImplTest" time="0.002"/>
+  <testcase name="clear()" classname="cliente.cache.CacheClienteImplTest" time="0.003"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
