@@ -1,0 +1,122 @@
+package cliente.Services
+
+import org.example.cliente.Services.ClienteServiceImpl
+import org.example.cliente.cache.CacheCliente
+import org.example.cliente.exceptions.ClienteServiceExceptions
+import org.example.cliente.models.Cliente
+import org.example.cliente.models.CuentaBancaria
+import org.example.cliente.models.TarjetaCredito
+import org.example.cliente.repositories.ClienteRepository
+import org.example.cliente.validators.DniValidator
+import org.example.cliente.validators.IbanValidator
+import org.example.cliente.validators.TarjetaValidator
+import org.junit.jupiter.api.Test
+
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
+import java.util.*
+
+@ExtendWith(MockitoExtension::class)
+
+class ClienteServiceImplTest {
+    @Mock
+    private lateinit var dniValidator: DniValidator
+    @Mock
+    private lateinit var tarjetaValidator: TarjetaValidator
+    @Mock
+    private lateinit var IbanValidator: IbanValidator
+    @Mock
+    private lateinit var clienteRepository: ClienteRepository
+    @Mock
+    private lateinit var cacheCliente: CacheCliente
+    @InjectMocks
+    private lateinit var clienteService: ClienteServiceImpl
+
+    val cuenta = CuentaBancaria("ES91 2100 0418 4502 0005 1332", 10.0)
+    val tarjetaCredito = TarjetaCredito("1234567890123456", "12/25")
+    val cliente = Cliente(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"), "test1", "70919049K", cuenta, tarjetaCredito)
+    val cliente2 = Cliente(UUID.fromString("1009777d-3155-44ca-a565-c8ede2ed2396"), "test2", "70919049K", cuenta, tarjetaCredito)
+    private val clienteList = listOf(cliente, cliente2)
+    @Test
+    fun getAll() {
+        whenever(clienteRepository.getAll()).thenReturn(clienteList)
+        val result = clienteService.getAll()
+        assertAll(
+            { assertEquals(2, result.size) },
+            { assertEquals(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"), result[0].id) },
+            { assertEquals(UUID.fromString("1009777d-3155-44ca-a565-c8ede2ed2396"), result[1].id) },
+        )
+        verify(clienteRepository, times(1)).getAll()
+    }
+
+    @Test
+    fun findByName() {
+        whenever(clienteRepository.getByName("test1") ).thenReturn(listOf(cliente))
+        val result = clienteService.findByName("test1")
+        assertAll(
+            { assert(result.size == 1) },
+            { assert(result[0].nombre == "test1") },
+        )
+        verify(clienteRepository, times(1)).getByName("test1")
+    }
+    @Test
+    fun notFoundByName(){
+        whenever(clienteRepository.getByName("test3") ).thenReturn(listOf())
+        val result = clienteService.findByName("test3")
+        assert(result.isEmpty())
+        verify(clienteRepository, times(1)).getByName("test3")
+    }
+
+    @Test
+    fun getByIdInCache() {
+        whenever (cacheCliente.get(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"))).thenReturn(cliente)
+        val result = clienteService.getById(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"))
+        assertAll(
+            { assertEquals(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"), result.id) },
+            { assertEquals("test1", result.nombre) },
+        )
+        verify(cacheCliente, times(1)).get(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"))
+    }
+    @Test
+    fun getByIdnotInCache(){
+        whenever (cacheCliente.get(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"))).thenReturn(null)
+        whenever(clienteRepository.getById(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"))).thenReturn(cliente)
+        val result = clienteService.getById(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"))
+        assertAll(
+            { assertEquals(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"), result.id) },
+            { assertEquals("test1", result.nombre) },
+        )
+        verify(cacheCliente, times(1)).get(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"))
+        verify(clienteRepository, times(1)).getById(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442a"))
+        verify(cacheCliente, times(1)).put(cliente.id, cliente)
+    }
+    @Test
+    fun getByIdNotFound(){
+        whenever (cacheCliente.get(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442b"))).thenReturn(null)
+        whenever(clienteRepository.getById(UUID.fromString("10815af8-4ec7-4bc4-8300-8b1be6fb442b"))).thenReturn(null)
+
+        val result = org.junit.jupiter.api.assertThrows<ClienteServiceExceptions.ClienteNotFoundException> {
+            clienteService.getById(cliente.id)
+        }
+        assertEquals("Cliente no encontrado", result.message)
+    }
+
+    @Test
+    fun save() {
+    }
+
+    @Test
+    fun update() {
+    }
+
+    @Test
+    fun delete() {
+    }
+}

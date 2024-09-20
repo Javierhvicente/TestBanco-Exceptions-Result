@@ -1,0 +1,110 @@
+package org.example.cliente.Services
+
+import com.github.michaelbull.result.*
+import org.example.cliente.cache.CacheCliente
+import org.example.cliente.errors.ClienteServiceError
+import org.example.cliente.errors.ValidatorError
+import org.example.cliente.models.Cliente
+import org.example.cliente.repositories.ClienteRepository
+import org.example.cliente.validators.DniValidator
+import org.example.cliente.validators.IbanValidator
+import org.example.cliente.validators.TarjetaValidator
+import org.lighthousegames.logging.logging
+import java.util.*
+private val logger = logging()
+class ClienteServiceImpl(
+   private val dniValidator: DniValidator,
+   private val ibanValidator: IbanValidator,
+   private val tarjetaValidator: TarjetaValidator,
+   private val repository: ClienteRepository,
+   private val cache: CacheCliente
+): ClientesService {
+    override fun getAll(): Result<List<Cliente>, ClienteServiceError> {
+        logger.debug { "Obteniendo a todos los clientes" }
+        return Ok(repository.getAll())
+    }
+
+    override fun findByName(name: String): Result<List<Cliente>, ClienteServiceError> {
+        logger.debug { "Buscando clientes por nombre: $name" }
+        val cliente = repository.getByName(name)
+        if(cliente.isEmpty()) {
+            logger.error { "No se encontraron clientes con el nombre: $name" }
+            return Err(ClienteServiceError.NotFound("No se encontraron clientes con el nombre: $name"))
+        } else {
+            logger.info { "Clientes encontrados: $cliente" }
+            return Ok(cliente)
+        }
+    }
+
+    override fun getById(id: UUID): Result<Cliente, ClienteServiceError> {
+        logger.debug { "Buscando cliente por ID: $id" }
+        val clienteCache =  cache.get(id)
+        if(clienteCache == null) {
+            val cliente = repository.getById(id)
+            if(cliente == null) {
+                logger.error { "Persona no encontrada con ID: $id" }
+                return Err(ClienteServiceError.NotFound("Persona no encontrada con ID: $id"))
+            }
+            cache.put(id, cliente)
+            logger.info { "Persona encontrada en el repositorio: $cliente" }
+            return Ok(cliente)
+        } else {
+            logger.info { "Persona encontrada en la cache: $clienteCache" }
+            return Ok(clienteCache)
+        }
+    }
+
+    override fun save(cliente: Cliente): Result<Cliente, ClienteServiceError> {
+        logger.debug { "Guardando en el repositorio persona $cliente" }
+        dniValidator.validateDni(cliente).mapBoth(
+            success = { logger.info { "DNI validado correctamente" } },
+            failure = { error -> return Err(ClienteServiceError.NotSaved("Persona no actualizada, fallo en validación de DNI")) }
+        )
+        ibanValidator.validateCuentaBancaria(cliente.cuentaBancaria).mapBoth(
+            success = { logger.info { "IBAN validado correctamente" } },
+            failure = { error -> return Err(ClienteServiceError.NotSaved("Persona no actualizada, fallo en validación de IBAN")) }
+        )
+        tarjetaValidator.validateTarjetaCredito(cliente.tarjetaCredito).mapBoth(
+            success = { logger.info { "Tarjeta de crédito validada correctamente" } },
+            failure = { error -> return Err(ClienteServiceError.NotSaved("Persona no actualizada, fallo en validación de tarjeta de crédito")) }
+        )
+        logger.info { "Persona guardada en el repositorio: $cliente" }
+        return Ok(cliente)
+    }
+
+    override fun update(id: UUID, cliente: Cliente): Result<Cliente, ClienteServiceError> {
+        logger.debug { "Actualizando en el repositorio con id: $id y datos: $cliente" }
+        dniValidator.validateDni(cliente).mapBoth(
+            success = { logger.info { "DNI validado correctamente" } },
+            failure = { error -> return Err(ClienteServiceError.NotUpdated("Persona no actualizada, fallo en validación de DNI")) }
+        )
+        ibanValidator.validateCuentaBancaria(cliente.cuentaBancaria).mapBoth(
+            success = { logger.info { "IBAN validado correctamente" } },
+            failure = { error -> return Err(ClienteServiceError.NotUpdated("Persona no actualizada, fallo en validación de IBAN")) }
+        )
+        tarjetaValidator.validateTarjetaCredito(cliente.tarjetaCredito).mapBoth(
+            success = { logger.info { "Tarjeta de crédito validada correctamente" } },
+            failure = { error -> return Err(ClienteServiceError.NotUpdated("Persona no actualizada, fallo en validación de tarjeta de crédito")) }
+        )
+        cache.remove(id)
+        val result = repository.update(id, cliente)
+        if (result == null) {
+            logger.error { "Persona no actualizada con ID: $id" }
+            return Err(ClienteServiceError.NotFound(("Persona no actualizada con ID: $id")))
+        }
+        logger.info { "Persona actualizada en el repositorio: $result" }
+        return Ok(result)
+    }
+
+    override fun delete(id: UUID): Result<Cliente, ClienteServiceError> {
+        logger.debug { "Eliminando en el repositorio con id: $id" }
+        cache.remove(id)
+        val result = repository.delete(id)
+        if (result == null) {
+            logger.error { "Persona no encontrada con ID: $id" }
+            return Err(ClienteServiceError.NotDeleted("Persona no borrada con ID: $id"))
+        }
+        logger.info { "Persona eliminada en el repositorio: $result" }
+        return Ok(result)
+    }
+}

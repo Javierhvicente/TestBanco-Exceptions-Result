@@ -1,0 +1,4 @@
+package org.example.cliente.cache
+
+interface Cache {
+}

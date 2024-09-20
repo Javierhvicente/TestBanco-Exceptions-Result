@@ -1,0 +1,31 @@
+package org.example.cliente.cache
+
+import org.example.cliente.errors.CacheError
+import org.example.cliente.models.Cliente
+import java.util.*
+
+class CacheClienteImpl(
+    private val maxSize: Int = 5
+): CacheCliente {
+    private val cache: MutableMap<UUID, Cliente> = mutableMapOf()
+
+    override fun get(key: K): Result<Cliente, CacheError> {
+        logger.debug { "Obteniendo valor de la cache" }
+        return if (cache.containsKey(key)) {
+            Ok(cache.getValue(key))
+        } else {
+            Err(CacheError("No existe el valor en la cache"))
+        }
+    }
+
+    override fun put(key: UUID, value: Cliente) {
+        cache[key] = value
+    }
+
+    override fun remove(key: UUID) {
+        cache.remove(key)
+    }
+
+    override fun clear() = cache.clear()
+    override fun size() = cache.size
+}

@@ -1,0 +1,92 @@
+package org.example.cliente.Services
+
+import org.example.cliente.cache.CacheCliente
+import org.example.cliente.exceptions.ClienteServiceExceptions
+import org.example.cliente.models.Cliente
+import org.example.cliente.repositories.ClienteRepository
+import org.example.cliente.validators.DniValidator
+import org.example.cliente.validators.IbanValidator
+import org.example.cliente.validators.TarjetaValidator
+import org.lighthousegames.logging.logging
+import java.util.*
+private val logger = logging()
+class ClienteServiceImpl(
+   private val dniValidator: DniValidator,
+   private val ibanValidator: IbanValidator,
+   private val tarjetaValidator: TarjetaValidator,
+   private val repository: ClienteRepository,
+   private val cache: CacheCliente
+): ClientesService {
+    override fun getAll(): List<Cliente> {
+        logger.debug { "Obteniendo a todos los clientes" }
+        val clientes = repository.getAll()
+        logger.info { "Clientes obtenidos: $clientes" }
+        return clientes
+    }
+
+    override fun findByName(name: String): List<Cliente> {
+        logger.debug { "Buscando clientes por nombre: $name" }
+        val clientes = repository.getByName(name) ?: throw ClienteServiceExceptions.ClienteNotFoundException("Cliente no encontrado con nombre $name")
+        logger.info { "Clientes encontrados: $clientes" }
+        return clientes
+    }
+
+    override fun getById(id: UUID): Cliente {
+        logger.debug { "Buscando cliente por ID: $id" }
+        val cliente = cache.get(id)?.let {
+            logger.info { "Cliente encontrado en caché: $it" }
+            it
+        } ?: run {
+            val cliente = repository.getById(id)
+            if (cliente != null) {
+                cache.put(cliente.id, cliente)
+            }
+            logger.info { "Cliente encontrado en repositorio: $cliente" }
+            cliente
+        }
+        if (cliente == null) {
+            logger.error { "Cliente no encontrado con id $id" }
+            throw ClienteServiceExceptions.ClienteNotFoundException("Cliente no encontrado con id $id")
+        }
+
+        return cliente
+
+    }
+
+    override fun save(cliente: Cliente): Cliente {
+        logger.debug { "Guardando en el repositorio persona $cliente" }
+        dniValidator.validateDni(cliente)
+        ibanValidator.validateCuentaBancaria(cliente.cuentaBancaria)
+        tarjetaValidator.validateTarjetaCredito(cliente.tarjetaCredito)
+        val result = repository.create(cliente)
+        logger.info { "Persona guardada en el repositorio: $result" }
+        return result
+    }
+
+    override fun update(id: UUID, cliente: Cliente): Cliente {
+        logger.debug { "Actualizando en el repositorio con id: $id y datos: $cliente" }
+        dniValidator.validateDni(cliente)
+        ibanValidator.validateCuentaBancaria(cliente.cuentaBancaria)
+        tarjetaValidator.validateTarjetaCredito(cliente.tarjetaCredito)
+        cache.remove(id)
+        val result = repository.update(id, cliente)
+        if (result == null) {
+            logger.error { "Persona no actualizada con ID: $id" }
+            throw ClienteServiceExceptions.ClienteNotUpdatedException("Persona no actualizada con ID: $id")
+        }
+        logger.info { "Persona actualizada en el repositorio: $result" }
+        return result
+    }
+
+    override fun delete(id: UUID): Cliente {
+        logger.debug { "Eliminando en el repositorio con id: $id" }
+        cache.remove(id)
+        val result = repository.delete(id)
+        if (result == null) {
+            logger.error { "Persona no encontrada con ID: $id" }
+            throw ClienteServiceExceptions.ClienteNotDeletedException("Persona no borrada con ID: $id")
+        }
+        logger.info { "Persona eliminada en el repositorio: $result" }
+        return result
+    }
+}

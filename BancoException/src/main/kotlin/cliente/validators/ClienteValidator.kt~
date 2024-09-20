@@ -1,0 +1,9 @@
+package org.example.cliente.validators
+
+class ClienteValidator(
+    val dniValidator: DniValidator,
+    val ibanValidator: IbanValidator,
+    val tarjetaValidator: TarjetaValidator
+
+) {
+}
